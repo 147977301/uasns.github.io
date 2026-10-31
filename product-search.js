@@ -1,7 +1,7 @@
 (()=>{
  if(location.pathname!=='/search.html')return;
  const keyword=(new URLSearchParams(location.search).get('kw')||'').trim();
- const terms=keyword.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+ const terms=keyword.toLocaleLowerCase().replace(/小红书/g,' 小红书 ').replace(/(老号|白号|实名|海外|粉丝|专业|运营|cookie|男号|女号|续费)/g,' $1 ').split(/\s+/).filter(Boolean).filter(t=>!['购买','出售','批发','账号','帐号','号'].includes(t));
  const field=document.querySelector('input[name="kw"]');if(field)field.value=keyword;
  const matches=text=>terms.every(term=>text.toLocaleLowerCase().includes(term));
  let count=0;const groups=new Map();
